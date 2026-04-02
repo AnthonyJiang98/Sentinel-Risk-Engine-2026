@@ -190,48 +190,51 @@ const getRiskScore = (risk: string) => {
           </div>
         </header>
 
-        {/* TABLE */}
+{/* TABLE */}
         <div className="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
-          <table className="w-full text-left">
-            <thead className="bg-slate-50/50 border-b border-slate-200">
-              <tr>
-                <th className="p-5 w-12">
-                  <input 
-                    type="checkbox" 
-                    checked={selectedIds.length > 0 && selectedIds.length === filteredTransactions.length} 
-                    onChange={() => setSelectedIds(selectedIds.length === filteredTransactions.length ? [] : filteredTransactions.map(t => t.id))} 
-                  />
-                </th>
-                <th className="p-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Transaction</th>
-                <th className="p-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Entity Name</th>
-                <th className="p-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Risk Score</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {filteredTransactions.map((tx) => (
-                <tr key={tx.id} onClick={() => { setSelectedTx(tx); setIsEditing(false); }}
-                  className={`cursor-pointer transition-all ${selectedTx?.id === tx.id ? 'bg-slate-900 text-white' : 'hover:bg-slate-50'}`}>
-                  <td className="p-5" onClick={(e) => e.stopPropagation()}>
-                    <input type="checkbox" checked={selectedIds.includes(tx.id)} onChange={() => setSelectedIds(prev => prev.includes(tx.id) ? prev.filter(i => i !== tx.id) : [...prev, tx.id])} />
-                  </td>
-                  <td className={`p-5 text-sm font-mono ${selectedTx?.id === tx.id ? 'text-slate-300' : 'text-slate-400'}`}>{tx.id}</td>
-                  <td className="p-5">
-                    <div className="text-sm font-bold">{tx.user}</div>
-                    <div className="text-[10px] font-medium uppercase opacity-60">{tx.method}</div>
-                  </td>
-                  <td className="p-5 text-right">
-                    <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${
-                      tx.risk === 'High' ? 'bg-red-600 text-white' : 
-                      tx.risk === 'Medium' ? 'bg-amber-400 text-slate-900' : 
-                      'bg-emerald-500 text-white'
-                    }`}>
-                      {tx.risk}
-                    </span>
-                  </td>
+          {/* Scroll wrapper added below */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left min-w-[600px]">
+              <thead className="bg-slate-50/50 border-b border-slate-200">
+                <tr>
+                  <th className="p-5 w-12">
+                    <input 
+                      type="checkbox" 
+                      checked={selectedIds.length > 0 && selectedIds.length === filteredTransactions.length} 
+                      onChange={() => setSelectedIds(selectedIds.length === filteredTransactions.length ? [] : filteredTransactions.map(t => t.id))} 
+                    />
+                  </th>
+                  <th className="p-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Transaction</th>
+                  <th className="p-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Entity Name</th>
+                  <th className="p-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Risk Score</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {filteredTransactions.map((tx) => (
+                  <tr key={tx.id} onClick={() => { setSelectedTx(tx); setIsEditing(false); }}
+                    className={`cursor-pointer transition-all ${selectedTx?.id === tx.id ? 'bg-slate-900 text-white' : 'hover:bg-slate-50'}`}>
+                    <td className="p-5" onClick={(e) => e.stopPropagation()}>
+                      <input type="checkbox" checked={selectedIds.includes(tx.id)} onChange={() => setSelectedIds(prev => prev.includes(tx.id) ? prev.filter(i => i !== tx.id) : [...prev, tx.id])} />
+                    </td>
+                    <td className={`p-5 text-sm font-mono ${selectedTx?.id === tx.id ? 'text-slate-300' : 'text-slate-400'}`}>{tx.id}</td>
+                    <td className="p-5">
+                      <div className="text-sm font-bold">{tx.user}</div>
+                      <div className="text-[10px] font-medium uppercase opacity-60">{tx.method}</div>
+                    </td>
+                    <td className="p-5 text-right">
+                      <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${
+                        tx.risk === 'High' ? 'bg-red-600 text-white' : 
+                        tx.risk === 'Medium' ? 'bg-amber-400 text-slate-900' : 
+                        'bg-emerald-500 text-white'
+                      }`}>
+                        {tx.risk}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
