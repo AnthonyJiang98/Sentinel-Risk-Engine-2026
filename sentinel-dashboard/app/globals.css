@@ -5,13 +5,6 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -23,4 +16,51 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: auto;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #64748b #f1f5f9;
+}
+
+html::-webkit-scrollbar {
+  height: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 5px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Horizontal Scrollbar Styling */
+.overflow-x-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #64748b #f1f5f9;
+  overflow-x: scroll !important;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+  height: 10px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 5px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }
